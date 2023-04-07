@@ -10,5 +10,4 @@ declare(strict_types=1);
  */
 return [
     'router'       => 'url-manager',
-    'dependencies' => ['Weline_ModuleManager', 'Weline_Admin']
 ];
