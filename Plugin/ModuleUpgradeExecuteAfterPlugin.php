@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 /*
@@ -8,38 +7,26 @@ declare(strict_types=1);
  * 邮箱：aiweline@qq.com
  * 网址：aiweline.com
  * 论坛：https://bbs.aiweline.com
- * 日期：2022/9/15 21:46:12
+ * 日期：2023/6/23 11:50:30
  */
 
-namespace Weline\UrlManager\Observer;
+namespace Weline\UrlManager\Plugin;
 
 use Weline\Framework\App\Env;
-use Weline\Framework\App\Exception;
-use Weline\Framework\Event\Event;
-use Weline\Framework\Exception\Core;
 use Weline\ModuleManager\Model\Module;
 use Weline\UrlManager\Model\UrlManager;
 
-use function PHPUnit\Framework\throwException;
-
-class UrlUpdate implements \Weline\Framework\Event\ObserverInterface
+class ModuleUpgradeExecuteAfterPlugin
 {
-    private Module $module;
-    private UrlManager $urlManager;
-
-    public function __construct(
-        Module     $module,
-        UrlManager $urlManager
-    )
+    private $module =  null;
+    private $urlManager =  null;
+    function __construct(Module $module,UrlManager $urlManager)
     {
-        $this->module     = $module;
+        $this->module = $module;
         $this->urlManager = $urlManager;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function execute(Event $event)
+    function afterExecute()
     {
         # 读取前端PC url存放位置更新到数据库中
         if (is_file(Env::path_FRONTEND_PC_ROUTER_FILE)) {
@@ -129,6 +116,5 @@ class UrlUpdate implements \Weline\Framework\Event\ObserverInterface
                 }
             }
         }
-
     }
 }
