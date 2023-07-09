@@ -36,17 +36,16 @@ class ModuleUpgradeExecuteAfterPlugin
                 foreach ($frontend_pc_urls as $path => $frontend_pc_url) {
                     $this->module->recovery();
                     $module_id = $this->module->load('name', $frontend_pc_url['module'])->getId();
-                    if (!$module_id) {
-                        throw new \Exception(__('模型不存在！'));
+                    if ($module_id) {
+                        $this->urlManager->recovery();
+                        $this->urlManager
+                            ->setData('module_id', $module_id)
+                            ->setData('path', $path)
+                            ->setData('identify', md5($path . $type), true)
+                            ->setData('data', json_encode($frontend_pc_url))
+                            ->setData('type', $type)
+                            ->save();
                     }
-                    $this->urlManager->recovery();
-                    $this->urlManager
-                        ->setData('module_id', $module_id)
-                        ->setData('path', $path)
-                        ->setData('identify', md5($path . $type), true)
-                        ->setData('data', json_encode($frontend_pc_url))
-                        ->setData('type', $type)
-                        ->save();
                 }
         }
 
@@ -58,17 +57,16 @@ class ModuleUpgradeExecuteAfterPlugin
                 foreach ($frontend_api_urls as $path => $frontend_api_url) {
                     $this->module->recovery();
                     $module_id = $this->module->load('name', $frontend_api_url['module'])->getId();
-                    if (!$module_id) {
-                        throw new \Exception(__('模型不存在！'));
+                    if ($module_id) {
+                        $this->urlManager->recovery();
+                        $this->urlManager
+                            ->setData('module_id', $module_id)
+                            ->setData('path', $path)
+                            ->setData('identify', md5($path . $type), true)
+                            ->setData('data', json_encode($frontend_api_url))
+                            ->setData('type', $type)
+                            ->save();
                     }
-                    $this->urlManager->recovery();
-                    $this->urlManager
-                        ->setData('module_id', $module_id)
-                        ->setData('path', $path)
-                        ->setData('identify', md5($path . $type), true)
-                        ->setData('data', json_encode($frontend_api_url))
-                        ->setData('type', $type)
-                        ->save();
                 }
         }
 
@@ -80,17 +78,16 @@ class ModuleUpgradeExecuteAfterPlugin
                 foreach ($backend_pc_urls as $path => $backend_pc_url) {
                     $this->module->recovery();
                     $module_id = $this->module->load('name', $backend_pc_url['module'])->getId();
-                    if (!$module_id) {
-                        throw new \Exception(__('模型不存在！'));
+                    if ($module_id) {
+                        $this->urlManager->recovery();
+                        $this->urlManager
+                            ->setData('module_id', $module_id)
+                            ->setData('path', $path)
+                            ->setData('identify', md5($path . $type), true)
+                            ->setData('data', json_encode($backend_pc_url))
+                            ->setData('type', $type)
+                            ->save();
                     }
-                    $this->urlManager->recovery();
-                    $this->urlManager
-                        ->setData('module_id', $module_id)
-                        ->setData('path', $path)
-                        ->setData('identify', md5($path . $type), true)
-                        ->setData('data', json_encode($backend_pc_url))
-                        ->setData('type', $type)
-                        ->save();
                 }
         }
 
@@ -103,16 +100,15 @@ class ModuleUpgradeExecuteAfterPlugin
                     $this->module->recovery();
                     $module_id = $this->module->load('name', $backend_api_url['module'])->getId();
                     if (!$module_id) {
-                        throw new \Exception(__('模型不存在！'));
+                        $this->urlManager->recovery();
+                        $this->urlManager
+                            ->setData('module_id', $module_id)
+                            ->setData('path', $path)
+                            ->setData('identify', md5($path . $type), true)
+                            ->setData('data', json_encode($backend_api_url))
+                            ->setData('type', $type)
+                            ->save();
                     }
-                    $this->urlManager->recovery();
-                    $this->urlManager
-                        ->setData('module_id', $module_id)
-                        ->setData('path', $path)
-                        ->setData('identify', md5($path . $type), true)
-                        ->setData('data', json_encode($backend_api_url))
-                        ->setData('type', $type)
-                        ->save();
                 }
             }
         }
